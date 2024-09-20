@@ -1,10 +1,13 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config();  // Make sure dotenv is set up for local development
 
-// Define the PostgreSQL connection using DATABASE_URL
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+
+const { Sequelize } = require('sequelize');
+require('dotenv').config();
+
+const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://postgres:Devan@localhost:5432/task_scheduler', {
     dialect: 'postgres',
-    logging: false,  // Set to true if you want to see SQL queries
+    logging: false,
     pool: {
         max: 5,
         min: 0,
@@ -12,5 +15,8 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
         idle: 10000
     }
 });
+
+module.exports = sequelize;
+
 
 module.exports = sequelize;
